@@ -9,9 +9,17 @@ export default function Action({ onClickAction, type }) {
     <i
       className="tiny material-icons"
       onClick={handleClickAction}
-      style={{ cursor: 'pointer', fontSize: '1.3rem' }}
+      style={styles.actionStyle}
     >
       {type}
     </i>
   );
 }
+
+const styles = {
+  actionStyle: {
+    cursor: 'pointer',
+    fontSize: '1.3rem',
+    marginRight: '10px',
+  },
+};

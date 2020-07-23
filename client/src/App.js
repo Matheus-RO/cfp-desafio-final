@@ -174,7 +174,7 @@ export default function App() {
   return (
     <div className="container">
       <div className="center">
-        <h3>Desafio Final do Bootcamp Full Stack</h3>
+        <h3 style={styles.title}>Bootcamp Full Stack - Desafio Final</h3>
         <h5>Controle Financeiro Pessoal</h5>
       </div>
 
@@ -223,3 +223,10 @@ export default function App() {
     </div>
   );
 }
+
+const styles = {
+  title: {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+  },
+};

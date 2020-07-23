@@ -22,7 +22,7 @@ export default function PeriodSelector({
   }
 
   return (
-    <div className="center">
+    <div style={styles.flexRow}>
       <select
         className="browser-default"
         value={selectedPeriod.id}
@@ -42,7 +42,12 @@ export default function PeriodSelector({
 const styles = {
   selectStyle: {
     width: '150px',
-    marginTop: '20px',
-    marginBottom: '20px',
+  },
+  flexRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '20px',
   },
 };

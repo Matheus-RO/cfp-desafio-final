@@ -31,7 +31,6 @@ export default function AccountingEntry({ onChangeFilter, onInsertButton }) {
 
 const styles = {
   flexRow: {
-    padding: '10px',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',

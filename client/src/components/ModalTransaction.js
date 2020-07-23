@@ -3,6 +3,9 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
+const EARNING_COLOR = '#27ae60';
+const EXPENSE_COLOR = '#c0392b';
+
 function getCurrentDate() {
   const date = new Date();
 
@@ -72,7 +75,7 @@ export default function ModalTransaction({
   };
 
   const handleValueChange = (event) => {
-    const newValue = event.target.value;
+    const newValue = +event.target.value;
     setValue(newValue);
   };
 
@@ -126,6 +129,18 @@ export default function ModalTransaction({
     return description.trim() !== '' && category.trim() !== '';
   };
 
+  const { expenseEarningStyle } = styles;
+
+  const earningStyle =
+    mode === 'insert'
+      ? { color: EARNING_COLOR, ...expenseEarningStyle }
+      : expenseEarningStyle;
+
+  const expenseStyle =
+    mode === 'insert'
+      ? { color: EXPENSE_COLOR, ...expenseEarningStyle }
+      : expenseEarningStyle;
+
   return (
     <div>
       <Modal isOpen={isOpen} style={styles.modalStyle}>
@@ -151,7 +166,7 @@ export default function ModalTransaction({
                   checked={type === '+'}
                   disabled={mode === 'edit'}
                 />
-                <span style={styles.earningStyle}>Receita</span>
+                <span style={earningStyle}>Receita</span>
               </label>
 
               <label>
@@ -164,7 +179,7 @@ export default function ModalTransaction({
                   checked={type === '-'}
                   disabled={mode === 'edit'}
                 />
-                <span style={styles.expenseStyle}>Despesa</span>
+                <span style={expenseStyle}>Despesa</span>
               </label>
             </div>
             <div className="input-field">
@@ -175,6 +190,7 @@ export default function ModalTransaction({
                 value={description}
                 onChange={handleDescriptionChange}
                 style={styles.inputStyle}
+                required
               />
               <label className="active" htmlFor="inputDescription">
                 Descrição:
@@ -188,6 +204,7 @@ export default function ModalTransaction({
                 value={category}
                 onChange={handleCategoryChange}
                 style={styles.inputStyle}
+                required
               />
               <label className="active" htmlFor="inputCategory">
                 Categoria:
@@ -204,6 +221,7 @@ export default function ModalTransaction({
                   value={value}
                   onChange={handleValueChange}
                   style={styles.inputStyle}
+                  required
                 />
                 <label className="active" htmlFor="inputValue">
                   Valor:
@@ -217,6 +235,7 @@ export default function ModalTransaction({
                 type="date"
                 value={date}
                 onChange={handleDateChange}
+                required
               />
             </div>
 
@@ -262,13 +281,7 @@ const styles = {
     marginTop: '20px',
     marginBottom: '30px',
   },
-  earningStyle: {
-    color: '#27ae60',
-    fontWeight: 'bold',
-    fontSize: '1.3rem',
-  },
-  expenseStyle: {
-    color: '#c0392b',
+  expenseEarningStyle: {
     fontWeight: 'bold',
     fontSize: '1.3rem',
   },

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //Define a URL base da origem para consumo do servico
 export default axios.create({
-  baseURL: 'https://cfp-desafio-final.herokuapp.com/api',
+  baseURL: '/api',
   headers: {
     'Content-type': 'application/json',
   },
