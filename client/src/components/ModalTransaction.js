@@ -119,7 +119,6 @@ export default function ModalTransaction({
     }
 
     onSave(transactionToUpdate, mode, id);
-    console.log(transactionToUpdate, `update: ${id}`);
   };
 
   const title =

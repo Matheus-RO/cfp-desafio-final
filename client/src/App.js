@@ -170,7 +170,6 @@ export default function App() {
     }
   };
 
-  console.log(transactionsData);
   return (
     <div className="container">
       <div className="center">
