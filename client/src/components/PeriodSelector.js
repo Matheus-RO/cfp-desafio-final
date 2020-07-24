@@ -1,14 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import ArrowButton from './ArrowButton';
 
 export default function PeriodSelector({
   allPeriods,
   selectedPeriod,
   onChangePeriod,
 }) {
+  const [isFirstPeriod, setIsFirstPeriod] = useState(false);
+  const [isLastPeriod, setIsLastPeriod] = useState(false);
+
   useEffect(() => {
-    if (!selectedPeriod || !selectedPeriod) {
+    if (!selectedPeriod || !allPeriods) {
       return;
     }
+
+    const currentIndex = allPeriods.findIndex(
+      (item) => item.id === selectedPeriod.id
+    );
+    const checkIsFirstPeriod = currentIndex === 0;
+    const checkIsLastPeriod = currentIndex === allPeriods.length - 1;
+
+    setIsFirstPeriod(checkIsFirstPeriod);
+    setIsLastPeriod(checkIsLastPeriod);
   }, [selectedPeriod, allPeriods]);
 
   const handleSelectChange = (event) => {
@@ -21,8 +34,25 @@ export default function PeriodSelector({
     return null;
   }
 
+  const handleLeftButtonClick = () => {
+    const index = allPeriods.findIndex((item) => item.id === selectedPeriod.id);
+
+    onChangePeriod(allPeriods[index - 1]);
+  };
+
+  const handleRightButtonClick = () => {
+    const index = allPeriods.findIndex((item) => item.id === selectedPeriod.id);
+
+    onChangePeriod(allPeriods[index + 1]);
+  };
+
   return (
     <div style={styles.flexRow}>
+      <ArrowButton
+        type="left"
+        buttonDisabled={isFirstPeriod}
+        onArrowClick={handleLeftButtonClick}
+      />
       <select
         className="browser-default"
         value={selectedPeriod.id}
@@ -35,6 +65,11 @@ export default function PeriodSelector({
           </option>
         ))}
       </select>
+      <ArrowButton
+        type="right"
+        buttonDisabled={isLastPeriod}
+        onArrowClick={handleRightButtonClick}
+      />
     </div>
   );
 }
@@ -42,6 +77,7 @@ export default function PeriodSelector({
 const styles = {
   selectStyle: {
     width: '150px',
+    height: '36px',
   },
   flexRow: {
     display: 'flex',
